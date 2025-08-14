@@ -3,11 +3,32 @@ import axios from "axios"
 
 // reducers take object as arguments 
 // and extraReducer take function as arguements
+//
 
-export const fetchData = createAsyncThunk("fetchData", async(url) => {
-    const response = await axios.get(url);
-    return response.data.results;
+export const fetchData = createAsyncThunk("fetchData", async(arr) => {
+
+    if(Array.isArray(arr)){
+        const promises = [];
+        arr.forEach((url) => promises.push(axios.get(url)))
+        const response = await Promise.all(promises);
+        // console.log(response);
+        return response.map(obj => obj.data)
+    } 
 })
+
+
+// export const fetchData = createAsyncThunk("fetchData", async (arr) => {
+//   if (Array.isArray(arr)) {
+//     const promises = [];
+//     arr.forEach((url) => promises.push(axios.get(url)));
+//     const response = await Promise.all(promises);
+//     // console.log(response);
+//     // return response.map((obj) => obj.data);
+//   }
+// });
+
+
+
 
 const movieSl = createSlice({
     name : "movies",
@@ -18,7 +39,7 @@ const movieSl = createSlice({
     },
     reducers : {},
     extraReducers:(actionBuilder) => {
-        actionBuilder.addCase(fetchData.pending,(state, action) => {
+        actionBuilder.addCase(fetchData.pending,(state) => {
             state.loading = true;
         });
         actionBuilder.addCase(fetchData.fulfilled, (state, action) =>{

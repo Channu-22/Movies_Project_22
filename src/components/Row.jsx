@@ -1,47 +1,72 @@
-import { useEffect } from 'react';
-import {useDispatch, useSelector} from "react-redux"
-import { fetchData } from '../slices/moviesSlice';
-// import { movieReducer } from '../slices/moviesSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../slices/moviesSlice";
+import { useEffect, useState } from "react";
+import { IMG_BASE_PATH } from "../url";
+import { Link } from "react-router-dom";
+let copy = [];
 
-function Row({heading,tab,url}) {
-
-    // DISPATCH IS USED TO DISPATCH THE ACTIONS FROM THE REDEX STORE
-    const dispatch = useDispatch();
-
-    // USESELECTOR IS USED TO SELECT THE STATE FROM THE REDUX STORE
-    const initState = useSelector((state) => {
-        return state.movieReducer;
-
-    });
-
-    // DATA WILL BE FETCHED WHEN THE COMPONENT MOUNTS
-    // USEEFFECT WILL RUN ONCE WHEN THE COMPONENT MOUNTS
-    // AND IT WILL DISPATCH THE FETCHED ACTION WITH THE URL PASSED AS AN ARGUMENT
-    useEffect(() => {
-        dispatch(fetchData(url[0]))
-
-    },[dispatch, url])
+function Row({ heading, tab, url }) {
+  const dispatch = useDispatch();
+  const initState = useSelector((state) => state.movieReducer);
+  const [displayedIndex, setDisplayedIndex] = useState(0);
+  const [movieArr, setMovieArr] = useState([]);
 
 
-    
-    console.log(initState.movies)
+  //
+  useEffect(() => {
+    dispatch(fetchData(url));
+  }, [dispatch, url]);
+
+  useEffect(() => {
+    if (initState.movies.length > 0) {
+      setMovieArr(initState.movies.map((obj) => obj.results));
+    }
+  }, [initState.movies]);
+  console.log(movieArr);
+
+  console.log(initState.movies);
+  copy = [...movieArr];
 
   return (
-    <div className="flex px-14 text-white">
-        <header className="flex justify-between items-center w-full">
-            <h1>{heading}</h1>
-            <div className="toggler flex gap-4">
-                <button>
-                    {tab[0]}
-                </button>
-                <button>
-                    {tab[1]}
-                </button>
-            </div>
-        </header>
+    <section className="row px-14 text-white">
+      <header className="flex justify-between items-center mb-8">
+        <h2>{heading}</h2>
+        <div className="toggler">
+          <button className="capitalize" onClick={() => setDisplayedIndex(0)}>
+            {tab[0]}
+          </button>
+          <button className="capitalize" onClick={() => setDisplayedIndex(1)}>
+            {tab[1]}
+          </button>
+        </div>
+      </header>
 
-    </div>
-  )
+      <div className="carousel flex flex-wrap gap-3">
+        {copy?.length > 0 &&
+          copy[displayedIndex].map((obj) => {
+            return (
+              <div key={obj.id} className="card w-1/5">
+                <div className="image-container">
+                  <Link
+                    to={
+                      displayedIndex === 0
+                        ? `/movie/${obj.id}`
+                        : `/tv/${obj.id}`
+                    }
+                  >
+                    <img src={IMG_BASE_PATH + obj.poster_path} alt="" />
+                  </Link>
+                </div>
+                <div className="info">
+                  <h3></h3>
+                  <p className="release-date"></p>
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </section>
+  );
 }
 
 export default Row;
