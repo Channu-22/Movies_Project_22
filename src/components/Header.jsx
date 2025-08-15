@@ -12,7 +12,7 @@ function Header() {
       <ul className="flex gap-8 items-center">
         <li>
           <Link
-            to=""
+            to="/movies"
             className="text-white font-semibold hover:text-red-400 transition duration-300"
           >
             Movies
@@ -20,7 +20,7 @@ function Header() {
         </li>
         <li>
           <Link
-            to=""
+            to="/tv"
             className="text-white font-semibold hover:text-red-400 transition duration-300"
           >
             TV Shows

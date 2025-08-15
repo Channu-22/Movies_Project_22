@@ -1,1 +1,236 @@
 @import "tailwindcss";
+/* main.css or index.css */
+body {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+/* Row.jsx Styles */
+.row {
+  padding: 2rem 3.5rem;
+}
+
+.row header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.row h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.toggler {
+  display: flex;
+  gap: 1rem;
+}
+
+.toggler button {
+  padding: 0.5rem 1rem;
+  background-color: #374151;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggler button:hover {
+  background-color: #2563eb;
+}
+
+.toggler button.bg-blue-600 {
+  background-color: #2563eb;
+}
+
+.next-button {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.carousel {
+  display: flex;
+  gap: 1rem;
+}
+
+.card {
+  width: calc(20% - 0.8rem); /* 5 cards per row */
+  min-width: 150px;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  transition: transform 0.3s;
+}
+
+.image-container img:hover {
+  transform: scale(1.05);
+}
+
+.rating-circle {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #facc15;
+}
+
+.rating-circle p {
+  color: #facc15;
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.info {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.info h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.info p {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* Single.jsx Styles */
+.single-container {
+  padding: 2rem 3.5rem;
+}
+
+.single-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.single-container h1 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.single-container h2 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.single-container p {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.single-container strong {
+  font-weight: 600;
+}
+
+.actor-card {
+  width: 96px; /* Matches w-24 in Tailwind */
+  text-align: center;
+}
+
+.actor-card img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.actor-card p {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .row {
+    padding: 1rem;
+  }
+
+  .row h2 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    width: calc(33.33% - 0.67rem); /* 3 cards per row on tablets */
+  }
+
+  .rating-circle {
+    width: 32px;
+    height: 32px;
+    bottom: 6px;
+    right: 6px;
+  }
+
+  .rating-circle p {
+    font-size: 0.75rem;
+  }
+
+  .single-container {
+    padding: 1rem;
+  }
+
+  .single-container .flex {
+    flex-direction: column;
+  }
+
+  .single-container .w-1/3,
+  .single-container .w-2/3 {
+    width: 100%;
+  }
+
+  .single-container img {
+    max-width: 300px;
+    margin: 0 auto 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: calc(50% - 0.5rem); /* 2 cards per row on mobile */
+  }
+
+  .rating-circle {
+    width: 28px;
+    height: 28px;
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .rating-circle p {
+    font-size: 0.7rem;
+  }
+
+  .single-container h1 {
+    font-size: 1.75rem;
+  }
+
+  .single-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .single-container p {
+    font-size: 1rem;
+  }
+}
