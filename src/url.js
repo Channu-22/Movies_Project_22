@@ -13,5 +13,8 @@ export const URLs = {
   trendingByWeek: `${BASE_URL}trending/movie/week?language=en-US&api_key=${API_KEY}`,
   popularMovie: `${BASE_URL}movie/popular?language=en-US&api_key=${API_KEY}`,
   popularTV: `${BASE_URL}tv/popular?language=en-US&api_key=${API_KEY}`,
+  topRatedTVShows: `${BASE_URL}tv/top_rated?language=en-US&api_key=${API_KEY}`,
+  topRatedMovies: `${BASE_URL}movie/top_rated?language=en-US&api_key=${API_KEY}`,
+  
   search: `${BASE_URL}search/multi&include_adult=false&language=en-US&api_key=${API_KEY}`,
 };

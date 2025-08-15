@@ -11,8 +11,8 @@ function Home() {
     <Hero />
 
     <Row heading="Treding" tab={["Day", "Week"]} url={[URLs.trendingByDay,URLs.trendingByWeek]}/>
-    {/* <Row heading="What's Popular" tab={["Movies", "TV Shows"]}/>
-    <Row heading="Top Rated" tab={["Movies", "TV Shows"]}/> */}
+    <Row heading="What's Popular" tab={["Movies", "TV Shows"]} url={[URLs.popularMovie,URLs.popularTV]}/>
+    {/* <Row heading="Top Rated" tab={["TV Shows", "Movies"]} url={[URL.topRatedTVShows,URLs.topRatedMovies]}/>  */}
 
     
     </>
