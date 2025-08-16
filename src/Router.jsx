@@ -5,6 +5,10 @@ import First from "./pages/First";
 import Single from "./pages/Single";
 import Movie from "./pages/Movie";
 import TV from "./pages/TV";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AuthProvider from "./slices/Auth";
 
 const router = createBrowserRouter([
   {
@@ -25,19 +29,40 @@ const router = createBrowserRouter([
         element: <TV/>,
       },
       {
+        path:"/login",
+        element:<Login/>
+        
+      },
+      {
+        path:"/register",
+        element:<Register/>
+      }
+      ,
+      {
         path: "/movie/:id",
-        element: <Single />,
+        element: (
+          <ProtectedRoute>
+            <Single/>
+           </ProtectedRoute>
+        ),
       },
       {
         path: "/tv/:id",
-        element: <Single />,
+        element: (
+          <ProtectedRoute>
+            <Single/>
+          </ProtectedRoute>
+        ),
       },
     ],
   },
 ]);
 
 function Router() {
-  return <RouterProvider router={router} />;
+  return  (
+  <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>);
 }
 
 export default Router;
