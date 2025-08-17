@@ -1,12 +1,47 @@
-# React + Vite
+# 🎬 Movix
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Movix Logo](./Movix.png)
 
-Currently, two official plugins are available:
+Movix is a movie web application built with **React, Redux Toolkit, Tailwind CSS**, and **Firebase** for authentication.  
+It provides a smooth UI, secure sign-in/sign-up, and real-time movie data fetched from the **TMDB (The Movie Database) API**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔐 **Authentication & Authorization** with Firebase (Sign in / Sign up)  
+- 🎥 **Real-time Movies & TV Shows Data** fetched from TMDB API  
+- ⚛️ **React** for building UI components  
+- 📦 **Redux Toolkit** for state management  
+- 🌀 **Tailwind CSS** for fast and responsive styling  
+- 🎯 **React Hook Form** for handling forms easily  
+- 🛣 **React Router DOM** for navigation and routing  
+- 🌐 **Context API** for sharing state across components  
+- 🔥 **Firebase Backend** to handle user authentication  
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- React  
+- Redux Toolkit  
+- React Hook Form  
+- React Router DOM  
+- Context API  
+- Tailwind CSS  
+
+### Backend
+- Firebase Authentication (Sign in / Sign up)  
+
+### API
+- [TMDB (The Movie Database)](https://www.themoviedb.org/) for movies & TV shows  
+
+---
+
+## 📂 Project Setup
+
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/your-username/movix.git
+   cd movix
