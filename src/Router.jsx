@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./slices/Auth";
+import ContactForm from "./pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,12 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+
+      },
+      {
+
+        path:"/contact",
+        element:<ContactForm/>
 
       },
       {
