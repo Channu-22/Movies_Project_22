@@ -72,6 +72,15 @@ function Header() {
           </Link>
         </li>
         <li>
+          <Link
+            to="/search"
+            className="text-white font-semibold hover:text-red-400 transition duration-300 underline cursor-pointer"
+            onClick={() => setIsMenuOpen(false)} // Close menu on click
+          >
+            Search
+          </Link>
+        </li>
+        <li>
           {user ? (
             <button
               onClick={() => {

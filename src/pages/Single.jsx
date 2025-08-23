@@ -28,8 +28,18 @@ function Single() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{backgroundColor: '#04152d'}}>
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-amber-400"></div>
+       <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: "#04152d" }}
+      >
+        <div className="px-4 sm:px-6 lg:px-14 py-12">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-amber-400 mx-auto mb-4"></div>
+            <div className="text-white text-lg font-medium">
+              Loading Details...
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

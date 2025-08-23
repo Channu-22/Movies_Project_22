@@ -20,7 +20,7 @@ export const fetchSingleData = createAsyncThunk(
   "movies/fetchSingleData",
   async (pathArr, { rejectWithValue }) => {
     try {
-      const [type, id] = pathArr; // e.g., ["movie", "123"] or ["tv", "456"]
+      const [type, id] = pathArr;
       const apiKey = import.meta.env.VITE_TMDB_APIKEY;
       const url = `${BASE_URL}${type}/${id}?api_key=${apiKey}&append_to_response=credits`;
       const response = await axios.get(url);
@@ -55,19 +55,39 @@ export const fetchPopularTV = createAsyncThunk(
   }
 );
 
+export const searchData = createAsyncThunk(
+  "movies/searchData",
+  async ({ url, query }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${url}&query=${encodeURIComponent(query)}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const movieSlice = createSlice({
   name: "movies",
   initialState: {
     loading: false,
     error: null,
-    data: {}, // For Row.jsx data
-    singleMovie: null, // For Single.jsx data
-    popularMovies: null, // For Movie.jsx data
-    popularTV: null, // For TV.jsx data
+    data: {},
+    singleMovie: null,
+    popularMovies: null,
+    popularTV: null,
+    searchTerm: "",
+    searchResults: null,
   },
-  reducers: {},
+  reducers: {
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+      if (!action.payload.trim()) {
+        state.searchResults = null; // Clear results when search term is empty
+      }
+    },
+  },
   extraReducers: (builder) => {
-    // Handle fetchData (for Row.jsx)
     builder
       .addCase(fetchData.pending, (state) => {
         state.loading = true;
@@ -80,7 +100,6 @@ const movieSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Handle fetchSingleData (for Single.jsx)
       .addCase(fetchSingleData.pending, (state) => {
         state.loading = true;
         state.singleMovie = null;
@@ -94,7 +113,6 @@ const movieSlice = createSlice({
         state.error = action.payload;
         state.singleMovie = null;
       })
-      // Handle fetchPopularMovies (for Movie.jsx)
       .addCase(fetchPopularMovies.pending, (state) => {
         state.loading = true;
         state.popularMovies = null;
@@ -108,7 +126,6 @@ const movieSlice = createSlice({
         state.error = action.payload;
         state.popularMovies = null;
       })
-      // Handle fetchPopularTV (for TV.jsx)
       .addCase(fetchPopularTV.pending, (state) => {
         state.loading = true;
         state.popularTV = null;
@@ -121,8 +138,22 @@ const movieSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
         state.popularTV = null;
+      })
+      .addCase(searchData.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(searchData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchResults = action.payload;
+      })
+      .addCase(searchData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.searchResults = null;
       });
   },
 });
 
+export const { setSearchTerm } = movieSlice.actions;
 export const movieReducer = movieSlice.reducer;

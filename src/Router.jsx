@@ -10,6 +10,12 @@ import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./slices/Auth";
 import ContactForm from "./pages/Contact";
+import SearchResults from "./pages/SearchResults";
+
+/**
+ * <Route path="/search" element={<SearchResults />} />
+ * 
+ */
 
 const router = createBrowserRouter([
   {
@@ -34,6 +40,11 @@ const router = createBrowserRouter([
       {
         path: "/tv",
         element: <TV/>,
+      },
+      {
+        path:"/search",
+        element:<SearchResults />
+
       },
       {
         path:"/login",

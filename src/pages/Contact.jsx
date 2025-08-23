@@ -90,30 +90,35 @@ function MovieFeedbackForm() {
   };
 
   return (
-    <div className="min-h-screen  py-12 px-4">
+    <div className="min-h-screen  py-12 px-4 relative overflow-hidden">
+      {/* Movie themed decorative elements */}
+      <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-red-500 to-yellow-500 rounded-full opacity-20 blur-xl" />
+      <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-gradient-to-r from-yellow-500 to-red-500 rounded-full opacity-20 blur-xl" />
+      <div className="absolute top-1/4 right-1/4 w-8 h-8 bg-gradient-to-r from-red-500 to-yellow-500 rounded-full opacity-15 blur-lg" />
+      
       <div className="container mx-auto">
         <div className="max-w-2xl mx-auto">
           {/* Header Section */}
-          <div className="text-center  mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-300 rounded-full mb-6">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-red-600 to-yellow-500 rounded-full mb-6">
               <span className="text-2xl">🎬</span>
             </div>
-            <h1 className="text-4xl font-bold text-gray-50 mb-4">
-              Movie Feedback
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Movies Club Feedback
             </h1>
-            <p className="text-gray-50 text-base max-w-md mx-auto">
+            <p className="text-gray-300 text-base max-w-md mx-auto">
               Help us improve your movie discovery experience! Share your thoughts about our movie database.
             </p>
           </div>
 
           {/* Form Card */}
-          <div className="bg-white rounded-2xl p-6 shadow-xl">
+          <div className="bg-gray-800/90 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-gray-700">
             {/* SUCCESS/ERROR MESSAGE */}
             {submitMessage && (
               <div className={`mb-6 p-4 rounded-lg text-center ${
                 submitMessage.includes('Thank you') 
-                  ? 'bg-green-600 text-white' 
-                  : 'bg-red-600 text-white'
+                  ? 'bg-green-800/80 text-green-300 border border-green-600' 
+                  : 'bg-red-800/80 text-red-300 border border-red-600'
               }`}>
                 {submitMessage}
               </div>
@@ -122,7 +127,7 @@ function MovieFeedbackForm() {
             <div className="space-y-6">
               {/* Name Field */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                   Your Name *
                 </label>
                 <input
@@ -131,8 +136,8 @@ function MovieFeedbackForm() {
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:border-amber-400 focus:outline-none transition-colors text-gray-800 placeholder-gray-500 ${
-                    errors.name ? 'border-red-400' : 'border-gray-300'
+                  className={`w-full px-4 py-3 bg-gray-700/70 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 text-white placeholder-gray-400 ${
+                    errors.name ? 'border-red-500' : 'border-gray-600'
                   }`}
                   placeholder="Enter your name"
                 />
@@ -143,7 +148,7 @@ function MovieFeedbackForm() {
 
               {/* EMAIL FIELD */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                   Email Address *
                 </label>
                 <input
@@ -152,8 +157,8 @@ function MovieFeedbackForm() {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:border-amber-400 focus:outline-none transition-colors text-gray-800 placeholder-gray-500 ${
-                    errors.email ? 'border-red-400' : 'border-gray-300'
+                  className={`w-full px-4 py-3 bg-gray-700/70 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 text-white placeholder-gray-400 ${
+                    errors.email ? 'border-red-500' : 'border-gray-600'
                   }`}
                   placeholder="your.email@example.com"
                 />
@@ -162,9 +167,9 @@ function MovieFeedbackForm() {
                 )}
               </div>
 
-              {/* FAVORITE  */}
+              {/* FAVORITE GENRE */}
               <div>
-                <label htmlFor="favoriteGenre" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="favoriteGenre" className="block text-sm font-medium text-gray-300 mb-2">
                   Favorite Movie Genre *
                 </label>
                 <select
@@ -172,11 +177,11 @@ function MovieFeedbackForm() {
                   name="favoriteGenre"
                   value={form.favoriteGenre}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:border-amber-400 focus:outline-none transition-colors text-gray-800 ${
-                    errors.favoriteGenre ? 'border-red-400' : 'border-gray-300'
+                  className={`w-full px-4 py-3 bg-gray-700/70 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 text-white ${
+                    errors.favoriteGenre ? 'border-red-500' : 'border-gray-600'
                   }`}
                 >
-                  <option value="">Select your favorite genre</option>
+                  <option value="" className="text-gray-400">Select your favorite genre</option>
                   <option value="action">Action</option>
                   <option value="comedy">Comedy</option>
                   <option value="drama">Drama</option>
@@ -195,7 +200,7 @@ function MovieFeedbackForm() {
 
               {/* RATING */}
               <div>
-                <label htmlFor="rating" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="rating" className="block text-sm font-medium text-gray-300 mb-2">
                   Rate Our Movie Database *
                 </label>
                 <select
@@ -203,11 +208,11 @@ function MovieFeedbackForm() {
                   name="rating"
                   value={form.rating}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:border-amber-400 focus:outline-none transition-colors text-gray-800 ${
-                    errors.rating ? 'border-red-400' : 'border-gray-300'
+                  className={`w-full px-4 py-3 bg-gray-700/70 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 text-white ${
+                    errors.rating ? 'border-red-500' : 'border-gray-600'
                   }`}
                 >
-                  <option value="">Rate your experience</option>
+                  <option value="" className="text-gray-400">Rate your experience</option>
                   <option value="5">Excellent (5/5)</option>
                   <option value="4">Very Good (4/5)</option>
                   <option value="3">Good (3/5)</option>
@@ -219,9 +224,9 @@ function MovieFeedbackForm() {
                 )}
               </div>
 
-              {/* MOVIE SUGGESTION  */}
+              {/* MOVIE SUGGESTION */}
               <div>
-                <label htmlFor="movieSuggestion" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="movieSuggestion" className="block text-sm font-medium text-gray-300 mb-2">
                   Movie Recommendation
                 </label>
                 <input
@@ -230,14 +235,14 @@ function MovieFeedbackForm() {
                   name="movieSuggestion"
                   value={form.movieSuggestion}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:border-amber-400 focus:outline-none transition-colors text-gray-800 placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-gray-700/70 border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 text-white placeholder-gray-400"
                   placeholder="Suggest a movie we should add"
                 />
               </div>
 
               {/* FEEDBACK FIELD */}
               <div>
-                <label htmlFor="feedback" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="feedback" className="block text-sm font-medium text-gray-300 mb-2">
                   Your Feedback *
                 </label>
                 <textarea
@@ -246,8 +251,8 @@ function MovieFeedbackForm() {
                   rows="5"
                   value={form.feedback}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:border-amber-400 focus:outline-none transition-colors resize-none text-gray-800 placeholder-gray-500 ${
-                    errors.feedback ? 'border-red-400' : 'border-gray-300'
+                  className={`w-full px-4 py-3 bg-gray-700/70 border rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 resize-none text-white placeholder-gray-400 ${
+                    errors.feedback ? 'border-red-500' : 'border-gray-600'
                   }`}
                   placeholder="Tell us what you think about our movie database..."
                 />
@@ -261,10 +266,10 @@ function MovieFeedbackForm() {
                 type="button"
                 onClick={onSubmit}
                 disabled={isSubmitting}
-                className={`w-full py-4 px-6 rounded-lg font-semibold transition-colors ${
+                className={`w-full py-4 px-6 rounded-xl font-semibold transition-colors duration-200 ${
                   isSubmitting
                     ? 'bg-gray-600 text-white cursor-not-allowed'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-gradient-to-r from-red-600 to-yellow-500 text-white hover:from-red-700 hover:to-yellow-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800'
                 }`}
               >
                 {isSubmitting ? (
@@ -279,21 +284,21 @@ function MovieFeedbackForm() {
             </div>
 
             {/* FOOTER */}
-            <div className="mt-10 pt-8 border-t border-gray-200 text-center">
-              <div className="flex items-center justify-center space-x-3 text-gray-600 mb-4">
+            <div className="mt-10 pt-8 border-t border-gray-600 text-center">
+              <div className="flex items-center justify-center space-x-3 text-gray-300 mb-4">
                 <span className="text-2xl">🍿</span>
                 <p className="text-sm font-medium">
                   Your feedback helps us create a better movie discovery experience
                 </p>
                 <span className="text-2xl">🎭</span>
               </div>
-              <div className="flex items-center justify-center space-x-6 text-xs text-gray-500">
+              <div className="flex items-center justify-center space-x-6 text-xs text-gray-400">
                 <div className="flex items-center space-x-1">
                   <span className="w-2 h-2 bg-green-400 rounded-full"></span>
                   <span>Powered by TMDB</span>
                 </div>
                 <div className="flex items-center space-x-1">
-                  <span className="w-2 h-2 bg-amber-400 rounded-full"></span>
+                  <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
                   <span>Response within 48 hours</span>
                 </div>
               </div>

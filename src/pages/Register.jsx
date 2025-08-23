@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from "../fireBase";
@@ -17,6 +16,7 @@ function Register() {
     text: "",
   });
   const navigate = useNavigate();
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -34,7 +34,7 @@ function Register() {
       setMessage({ type: "success", text: "Account created successfully! 🎉" });
       setTimeout(() => {
         navigate("/login")
-      },1500);
+      }, 1500);
     } catch (error) {
       setMessage({ type: "error", text: error.message });
     }
@@ -42,21 +42,21 @@ function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center  relative overflow-hidden">
-      {/* Decorative blurred blobs */}
-      <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20 blur-xl animate-pulse" />
-      <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-20 blur-xl animate-pulse" />
+      {/* Movie themed decorative elements */}
+      <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-red-500 to-yellow-500 rounded-full opacity-20 blur-xl" />
+      <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-gradient-to-r from-yellow-500 to-red-500 rounded-full opacity-20 blur-xl" />
 
-      <div className="relative bg-white/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-md transition-all duration-500 hover:shadow-2xl">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8 tracking-tight drop-shadow-sm">
-          Register
+      <div className="relative bg-gray-800/90 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-700">
+        <h2 className="text-3xl font-bold text-center text-white mb-8 tracking-tight">
+          Join Movies Club
         </h2>
 
         {message.text && (
           <div
-            className={`mb-6 p-4 rounded-lg text-sm font-medium text-center transform transition-all duration-500 animate-bounce shadow-lg ${
+            className={`mb-6 p-4 rounded-lg text-sm font-medium text-center ${
               message.type === "success"
-                ? "bg-green-100 text-green-900 border-2 border-green-400 ring-1 ring-green-300 shadow-green-300"
-                : "bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border border-red-300 shadow-red-200"
+                ? "bg-green-800/80 text-green-300 border border-green-600"
+                : "bg-red-800/80 text-red-300 border border-red-600"
             }`}
           >
             {message.type === "success" ? "✓ " : "✕ "}
@@ -68,7 +68,7 @@ function Register() {
           <div className="space-y-2">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-300"
             >
               Email
             </label>
@@ -79,7 +79,7 @@ function Register() {
               placeholder="Enter your email"
               value={form.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-white/70 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-gray-700 placeholder-gray-400"
+              className="w-full px-4 py-3 bg-gray-700/70 border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 text-white placeholder-gray-400"
               required
             />
           </div>
@@ -87,7 +87,7 @@ function Register() {
           <div className="space-y-2">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-300"
             >
               Password
             </label>
@@ -98,28 +98,26 @@ function Register() {
               placeholder="Enter your password"
               value={form.password}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-white/70 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-gray-700 placeholder-gray-400"
+              className="w-full px-4 py-3 bg-gray-700/70 border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 text-white placeholder-gray-400"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="cursor-pointer w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-xl font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-[1.03] active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
+            className="w-full bg-gradient-to-r from-red-600 to-yellow-500 text-white py-3 rounded-xl font-semibold hover:from-red-700 hover:to-yellow-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 cursor-pointer"
           >
             Register
           </button>
         </form>
 
-        <p className="mt-6 text-center text-gray-600 text-sm font-medium">
+        <p className="mt-6 text-center text-gray-400 text-sm font-medium">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="relative inline-block px-4 py-1.5 text-purple-700 font-semibold bg-purple-100 rounded-full hover:bg-purple-200 hover:text-purple-900 transition-all duration-300 transform hover:scale-105 cursor-pointer group shadow-md"
+            className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-200"
           >
-            <span className="relative z-10">Login</span>
-            <span className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-sm"></span>
-            <span className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-purple-300 transition duration-300 animate-pulse"></span>
+            Login
           </Link>
         </p>
       </div>

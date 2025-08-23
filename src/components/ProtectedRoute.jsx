@@ -1,44 +1,48 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../slices/Auth";
 
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../slices/Auth';
+function ProtectedRoute({ children }) {
+  const [Loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-function ProtectedRoute({children}) {
-    const [Loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+  const { user } = useAuth();
 
-    const { user } = useAuth();
+  useEffect(() => {
+    const time = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
 
-    useEffect(() => {
-        const time = setTimeout(() => {
-            setLoading(false);
-        }, 1000);
+    return () => clearInterval(time);
+  }, []);
 
-        return () => clearInterval(time);
-    }, []);
-
-    if (Loading) {
-        return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 flex items-center justify-center">
-                <div className="text-center">
-                    <div className="w-30 h-30 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                        Loading ...
-                    </p>
-                </div>
+  if (Loading) {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: "#04152d" }}
+      >
+        <div className="px-4 sm:px-6 lg:px-14 py-12">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-amber-400 mx-auto mb-4"></div>
+            <div className="text-white text-lg font-medium">
+              Loading Details...
             </div>
-        );
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-    try {
-        if (!user) {
-            return navigate("/login");
-        }
-    } catch (error) {
-        console.error("Navigation error:", error);
+  try {
+    if (!user) {
+      return navigate("/login");
     }
+  } catch (error) {
+    console.error("Navigation error:", error);
+  }
 
-    return children;
+  return children;
 }
 
 export default ProtectedRoute;
